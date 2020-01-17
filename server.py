@@ -73,7 +73,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         error_code = "Moved Permanently"
         error_message = "The document has moved."
         html = ('<html><head>\r\n<title>{0}</title>\r\n</head>'
-        '<body>\r\n<h1>{1}</h1>\r\n<p>{2}</p>\r\n<A HREF={3}">Redirect to the correct page</A>\r\n</body>'
+        '<body>\r\n<h1>{1}</h1>\r\n<p>{2}</p>\r\n<A HREF={3}">Redirect to the correct path</A>\r\n</body>'
         '</html>').format(status_code, error_code, error_message, correct_path)
         mime_type = "text/html"
         http_response = ('HTTP/1.1 {0}\r\n'
@@ -121,20 +121,19 @@ class MyWebServer(socketserver.BaseRequestHandler):
         # And determine if it is a file or directory
         # Credit to https://linuxize.com/post/python-check-if-file-exists/
         if not os.path.exists(file_path):
-            # self.return_404_not_found()
-            file_path = file_path + "/"
-            self.return_301_moved_permantently("/")
+            self.return_404_not_found()
+
         else:
             if os.path.isdir(file_path):
                 if not file_path.endswith('/'):
                     file_path = file_path + "/"
-                    self.return_301_moved_permantently(file_path)
+                    self.return_301_moved_permantently("deep/")
 
-                file_path = file_path + "index.html"
-                self.return_200_ok(file_path)
-                print(file_path)
+                else:
+                    file_path = file_path + "index.html"
+                    self.return_200_ok(file_path)
+
             elif os.path.isfile(file_path):
-                print(file_path)
                 self.return_200_ok(file_path)
 
     # Check if the 'GET' method is contained within the request
