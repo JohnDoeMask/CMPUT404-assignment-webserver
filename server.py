@@ -59,15 +59,18 @@ class MyWebServer(socketserver.BaseRequestHandler):
         elif file_path.endswith("css"):
             mime_type = "text/css"
 
+        # Credit to https://docs.python.org/2/tutorial/errors.html
         try:
             with open(file_path, 'r') as sent_file:
                 html = sent_file.read()
-
             http_response = self.create_http_response(status_code, mime_type, html)
             self.send_http_response(http_response)
+
         except Exception as e:
             self.return_404_not_found()
 
+    # Create and send back the 301 Moved Permanently html
+    # Then redirect to the correct path
     def return_301_moved_permantently(self, correct_path):
         status_code = "301 Moved Permanently"
         error_code = "Moved Permanently"
@@ -84,6 +87,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         '{4}\r\n').format(status_code, correct_path, str(len(html)), mime_type, html)
         self.send_http_response(http_response)
 
+    # Create and send back the 404 Not Found html
     def return_404_not_found(self):
         status_code = "404 Not Found"
         error_code = "Not Found"
@@ -126,8 +130,10 @@ class MyWebServer(socketserver.BaseRequestHandler):
         else:
             if os.path.isdir(file_path):
                 if not file_path.endswith('/'):
-                    file_path = file_path + "/"
-                    self.return_301_moved_permantently("deep/")
+                    # file_path = file_path + "/"
+                    # Get the folder's name, and redirect to the correct path
+                    folder_withoutslash = os.path.split(file_path)[-1]
+                    self.return_301_moved_permantently(folder_withoutslash+ "/")
 
                 else:
                     file_path = file_path + "index.html"
