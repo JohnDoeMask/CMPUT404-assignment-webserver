@@ -62,11 +62,14 @@ class MyWebServer(socketserver.BaseRequestHandler):
         # Credit to https://docs.python.org/2/tutorial/errors.html
         try:
             with open(file_path, 'r') as sent_file:
+                # Get the content of the file
                 html = sent_file.read()
             http_response = self.create_http_response(status_code, mime_type, html)
             self.send_http_response(http_response)
 
         except Exception as e:
+            # If the file is not readable or the file doesn't exist,
+            # Then return the 404 status code
             self.return_404_not_found()
 
     # Create and send back the 301 Moved Permanently html
