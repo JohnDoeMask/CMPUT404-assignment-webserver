@@ -59,7 +59,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         elif file_path.endswith("css"):
             mime_type = "text/css"
 
-        # Credit to https://docs.python.org/2/tutorial/errors.html
+        # Credit to https://docs.python.org/3/tutorial/errors.html
         try:
             with open(file_path, 'r') as sent_file:
                 # Get the content of the file

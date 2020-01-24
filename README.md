@@ -27,10 +27,10 @@ compatible) http://docs.python.org/2/library/socketserver.html
 
 Reference
 =======================
-* https://www.tutorialspoint.com/http/http_responses.htm
-* https://docs.python.org/2/tutorial/errors.html
-* https://stackoverflow.com/questions/4934806/how-can-i-find-scripts-directory-with-python
-* https://linuxize.com/post/python-check-if-file-exists/
+* https://www.tutorialspoint.com/http/http_responses.htm *HTTP - Responses* by Tutorialspoint
+* https://docs.python.org/3/tutorial/errors.html *8. Errors and Exceptions* by Python 3.8.1 documentation
+* https://stackoverflow.com/questions/4934806/how-can-i-find-scripts-directory-with-python *How can I find script's directory with Python?* answered by [Czarek Tomczak](https://stackoverflow.com/users/623622/czarek-tomczak)
+* https://linuxize.com/post/python-check-if-file-exists/ *How to Check if a File or Directory Exists in Python* by Linuxize
 
 Collaboration
 =======================
